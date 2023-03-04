@@ -22,7 +22,7 @@ export default function myApp() {
         </Text>
         <Image
           source={require("./assets/logo.png")}
-          style={{ width: 100, height: 100, alignSelf: "center" }}
+          style={{ width: 200, height: 200, alignSelf: "center" }}
         />
         <Text
           style={{
@@ -32,7 +32,7 @@ export default function myApp() {
             margin: 10,
           }}
         >
-          Welcome ?? To "??ZahidSoftPk??" Add Dev. ??
+          Welcome 🌹 To 💤 GetCrack Zone 💻
         </Text>
       </View>
       <ScrollView>
@@ -104,7 +104,7 @@ export default function myApp() {
           margin: 10,
         }}
       >
-        Coded with ?? by Iftikhar Zahid.
+        Coded with 💞 by Iftikhar Zahid.
       </Text>
     </View>
   );
