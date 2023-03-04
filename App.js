@@ -7,6 +7,10 @@ import { Books } from "./src/screens/books";
 import { BookDetails } from "./src/screens/bookDetails";
 
 export default function App() {
+/*this is business logic area
+all actions are coded in it,
+*/
+
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
