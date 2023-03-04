@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 
 function BookDetails({ navigation, route }) {
   const incomingData = route.params;
-
+// consol .log is to show output
   console.log("hie");
 
   return (
