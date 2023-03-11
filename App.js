@@ -1,111 +1,26 @@
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-export default function myApp() {
-  return (
-    <View style={{ flex: 3 }}>
-      <View>
-        <Text
-          style={{
-            fontSize: 25,
-            fontWeight: "bold",
-            marginTop: 50,
-            marginLeft: 5,
-          }}
-        >
-          Sign up
-        </Text>
-        <Image
-          source={require("./assets/logo.png")}
-          style={{ width: 200, height: 200, alignSelf: "center" }}
-        />
-        <Text
-          style={{
-            alignSelf: "center",
-            fontSize: 15,
-            fontWeight: "bold",
-            margin: 10,
-          }}
-        >
-          Welcome 🌹 To 💤 GetCrack Zone 💻
-        </Text>
-      </View>
-      <ScrollView>
-        <View style={{ flex: 1 }}>
-          <TextInput
-            placeholder="User Name"
-            aria-label="Pak"
-            style={{
-              borderWidth: 1,
-              padding: 10,
-              margin: 10,
-              borderRadius: 15,
-            }}
-          ></TextInput>
-          <TextInput
-            placeholder="Password"
-            style={{
-              borderWidth: 1,
-              padding: 10,
-              margin: 10,
-              borderRadius: 15,
-            }}
-          ></TextInput>
-          <TextInput
-            placeholder="@Email.com"
-            style={{
-              borderWidth: 1,
-              padding: 10,
-              marginLeft: 10,
-              marginRight: 10,
-              marginTop: 10,
-              borderRadius: 15,
-            }}
-          ></TextInput>
+import React from 'react';
+import { TextInput, StyleSheet, Text,  View , Image, Button, } from 'react-native';
+import{styles} from './scr/components/theme'
 
-          <TouchableOpacity
-            style={{
-              window: "100%",
-              height: 40,
-              alignItems: "flex-end",
-              borderRadius: 15,
-              padding: 10,
-            }}
-          >
-            <Text>Already have an account?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              window: "100%",
-              height: 40,
-              backgroundColor: "red",
-              alignItems: "center",
-              borderRadius: 15,
-              padding: 10,
-              marginLeft: 10,
-              marginRight: 10,
-            }}
-          >
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              Create new account
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-      <Text
-        style={{
-          alignSelf: "center",
-          fontStyle: "italic",
-          margin: 10,
-        }}
-      >
-        Coded with 💞 by Iftikhar Zahid.
-      </Text>
-    </View>
-  );
-}
+export default function App ()
+  {
+    return (
+
+<View style={styles.container}>
+<View>
+  <Image source={require('./assets/seeks.png')} 
+  style={{height:200, width:200, alignSelf:'center'}} />
+</View>
+      <Text style={styles.text}>Welcome To Seeks Academy</Text>
+      
+      <TextInput placeholder='Email/Phone Number'
+        style={styles.textInput} />
+        <TextInput placeholder='Password'
+        style={styles.textInput} />
+<View style={{flexDirection:'row',}}>
+<Text style={styles.buttons}>Login</Text>
+        <Text style={styles.buttons}> Sign up</Text>
+</View>
+  </View>
+);
+  }
