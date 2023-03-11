@@ -12,9 +12,12 @@ export default function App ()
   style={{height:200, width:200, alignSelf:'center'}} />
 </View>
       <Text style={styles.text}>Welcome To Seeks Academy</Text>
+      <Text style={{marginLeft: 20}}> Enter Email or Phon number:</Text>
       
       <TextInput placeholder='Email/Phone Number'
         style={styles.textInput} />
+        <Text style={{marginLeft: 20}}> Enter Password:</Text>
+
         <TextInput placeholder='Password'
         style={styles.textInput} />
 <View style={{flexDirection:'row',}}>
