@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
       marginVertical:5
     },
     buttons:{
-      fontSize: 25,
-      fontWeight: "bold",
+      fontSize: 18,
       backgroundColor:'#025BA0',
-      borderRadius:10,
-      color:"white",
-      
-    }
+      borderRadius:20,
+      height:"30%",
+      width:"40%",
+      marginHorizontal:2,
+      alignItems:'center',
+      justifyContent:'center',
+      marginTop:5,
+    },
+  
   });
   export {styles};

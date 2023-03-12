@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, StyleSheet, Text,  View , Image, Button, } from 'react-native';
+import { TextInput, StyleSheet, Text,  View , Image, Button,TouchableOpacity } from 'react-native';
 import{styles} from './scr/components/theme'
 
 export default function App ()
@@ -12,18 +12,24 @@ export default function App ()
   style={{height:200, width:200, alignSelf:'center'}} />
 </View>
       <Text style={styles.text}>Welcome To Seeks Academy</Text>
-      <Text style={{marginLeft: 20}}> Enter Email or Phon number:</Text>
+      <Text style={{marginLeft: 25}}> Enter Email or Phone number:</Text>
       
       <TextInput placeholder='Email/Phone Number'
-        style={styles.textInput} />
-        <Text style={{marginLeft: 20}}> Enter Password:</Text>
+        style={styles.textInput}    />
+      <Text style={{marginLeft: 25}}> Enter Password:</Text>
 
-        <TextInput placeholder='Password'
-        style={styles.textInput} />
-<View style={{flexDirection:'row',}}>
-<Text style={styles.buttons}>Login</Text>
-        <Text style={styles.buttons}> Sign up</Text>
+      <TextInput placeholder='Password'
+      style={styles.textInput} />
+
+      <View style={{flexDirection:'row', alignSelf:'center'}}>
+        <TouchableOpacity style={styles.buttons}>
+        <Text style={{color:'white', fontWeight:'bold'}}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttons}>
+        <Text style={{color:'white', fontWeight:'bold'}}>Register</Text>
+        </TouchableOpacity>
+      </View>
 </View>
-  </View>
 );
   }
