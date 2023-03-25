@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { View, TextInput, StyleSheet, Button, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Button, Text , ActivityIndicator } from 'react-native';
 import { Main } from '../main/main';
+import Spinner from "react-native-loading-spinner-overlay";
 
 
 function Register({navigation}){
@@ -10,10 +11,11 @@ function Register({navigation}){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = () => {
     if (firstName === "") {
-      alert("please enter name");
+      alert("please enter first name");
       return;
     }
 
@@ -41,14 +43,18 @@ function Register({navigation}){
       alert("passwords dont match");
       return;
     }
-alert ("signedup succesfull")
+
+setLoading(true);
 navigation.navigate(Main)
+setLoading(false);
+
   }
 
 
   return (
     
     <View style={styles.container}>
+
       <Text style={styles.title}>Registration Page</Text>
       <TextInput
         onChangeText={setFirstName}
@@ -82,8 +88,11 @@ navigation.navigate(Main)
       />
       <Button title="Signup " onPress={onSubmit} />
 
+<View>
+<Spinner visible={loading} textContent={"Loading..."} />
+</View>
 
-    </View>
+</View>
 
     
     );
