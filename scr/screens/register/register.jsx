@@ -1,46 +1,93 @@
+import { useState } from "react";
 import { View, TextInput, StyleSheet, Button, Text } from 'react-native';
 import { Main } from '../main/main';
 
 
 function Register({navigation}){
 
-const goToLogin=()=>{
-  alert('User Registered');
-navigation.navigate(Main)
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+  const onSubmit = () => {
+    if (firstName === "") {
+      alert("please enter name");
+      return;
+    }
 
+    if (lastName === "") {
+      alert("please enter last name");
+
+      return;
+    }
+
+    if (email === "") {
+      alert("please enter email");
+      return;
+    }
+
+    if (password === "") {
+      alert("please enter password");
+      return;
+    }
+    if (confirmPassword === "") {
+      alert("please enter confirm password");
+      return;
+    }
+
+    if (confirmPassword !== password) {
+      alert("passwords dont match");
+      return;
+    }
+alert ("signedup succesfull")
+navigation.navigate(Main)
   }
 
+
   return (
+    
     <View style={styles.container}>
       <Text style={styles.title}>Registration Page</Text>
       <TextInput
+        onChangeText={setFirstName}
         style={styles.input}
-        placeholder="First Name"
+        placeholder="firstName"
       />
       <TextInput
+      onChangeText={setLastName}
         style={styles.input}
-        placeholder="Last Name"
+        placeholder="lastName"
       />
       <TextInput
+      onChangeText={setEmail}
         style={styles.input}
-        placeholder="Email"
+        placeholder="email"
       />
        
       <TextInput
+      onChangeText={setPassword}
         style={styles.input}
-        placeholder="Password"
+        placeholder="password"
         secureTextEntry
         
       />
       <TextInput
+      onChangeText={setConfirmPassword}
         style={styles.input}
-        placeholder="Confirm Password"
+        placeholder="confirmPassword"
         secureTextEntry
-        
+      
       />
-      <Button title="Signup " onPress={goToLogin} />
+      <Button title="Signup " onPress={onSubmit} />
+
+
     </View>
-  );
+
+    
+    );
+
 };
 
 const styles = StyleSheet.create({
@@ -63,4 +110,5 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
 export {Register};

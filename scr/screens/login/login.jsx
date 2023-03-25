@@ -4,10 +4,8 @@ import { Register } from '../register/register';
 
 function Login({navigation}){
 
-  const goToRegister=()=>{
-
-
-    
+const goToRegister=()=>{
+      
 navigation.navigate(Register)
 
   }
@@ -31,7 +29,12 @@ navigation.navigate(Register)
       <TouchableOpacity>
       <Text style={{ marginTop:10}} onPress={goToRegister} > Don't have an aacount?</Text>
       </TouchableOpacity>
-    </View>
+    
+
+
+
+</View>
+
   );
 };
 
