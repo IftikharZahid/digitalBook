@@ -2,6 +2,9 @@ import { useState } from "react";
 import { View, TextInput, StyleSheet, Button, Text , ActivityIndicator } from 'react-native';
 import { Main } from '../main/main';
 import Spinner from "react-native-loading-spinner-overlay";
+import { auth } from "../../services/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 
 
 function Register({navigation}){
@@ -12,6 +15,17 @@ function Register({navigation}){
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const onSubmitPress=()=>{
+
+    createUserWithEmailAndPassword (auth, email, password).then(response=>{
+      alert("All is Good")
+    })
+    .catch((error) =>{
+      alert(error.message);
+    });
+
+  }
 
   const onSubmit = () => {
     if (firstName === "") {
@@ -38,18 +52,16 @@ function Register({navigation}){
       alert("please enter confirm password");
       return;
     }
-
     if (confirmPassword !== password) {
       alert("passwords dont match");
       return;
     }
 
+    
 setLoading(true);
 navigation.navigate(Main)
 setLoading(false);
-
   }
-
 
   return (
     
@@ -86,7 +98,7 @@ setLoading(false);
         secureTextEntry
       
       />
-      <Button title="Signup " onPress={onSubmit} />
+      <Button title="Signup " onPress={onSubmitPress} />
 
 <View>
 <Spinner visible={loading} textContent={"Loading..."} />
