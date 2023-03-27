@@ -4,7 +4,7 @@ import { Main } from '../main/main';
 import Spinner from "react-native-loading-spinner-overlay";
 import { auth } from "../../services/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Camera } from 'expo-camera';
+import { styles } from "./register_style";
 import { Ionicons } from '@expo/vector-icons';
 
 function Register({navigation}){
@@ -81,7 +81,7 @@ const onEyePressed=()=>{
       
       <View>
        <Image source={require('../../.././assets/icon.png')} 
-       style={{width:100, height:100, borderRadius:20, borderWidth:1, borderColor:'black'}}>
+       style={{width:100, height:100, borderRadius:50, borderWidth:1, borderColor:'orange'}}>
        </Image>
       </View>
 
@@ -127,45 +127,8 @@ const onEyePressed=()=>{
 
 </View>
 
-    
     );
 
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    padding: 10,
-    marginVertical: 10,
-    width: '85%',
-  },
-  passwordCon:{
-    alignItems:'center',
-    flexDirection:'row',
-    borderRadius: 4,
-    borderWidth:1,    
-    borderColor: '#ccc',    
-    padding: 9,
-    marginVertical: 10,
-
-  },
-  passwordInput:{
-    width: '80%',
-
-  }
-
-});
 
 export {Register};

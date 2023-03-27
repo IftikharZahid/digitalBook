@@ -1,11 +1,51 @@
-import { View, TextInput, StyleSheet, Button, Text , TouchableOpacity} from 'react-native';
+import { useState } from "react";
+import { View, TextInput, Button, Text , TouchableOpacity} from 'react-native';
 import { Register } from '../register/register';
-
+import{styles} from './login_styles'
+import { Ionicons } from '@expo/vector-icons';
+import { Main } from "../main/main";
 
 function Login({navigation}){
 
-const goToRegister=()=>{
-      
+const [showPassword, setShowPassword] = useState();
+const [password, setPassword] = useState ();
+const [email, setEmail] = useState ();
+
+
+const userSigned =()=>{
+
+  if (email === "") {
+    alert("please enter Email/User Name");
+    return;
+  }
+
+  if (password === "") {
+    alert("please enter password");
+
+    return;
+  }
+  if( email !== password )
+  {
+      navigation.navigate(Main)
+  }
+  else{
+      alert ('email and password should not be same')
+
+  }
+};
+
+const onEyePressed=()=>{
+
+  if(showPassword=== true)
+  {
+    setShowPassword(false)
+  }
+  else {
+    setShowPassword(true)
+  }
+}
+
+const goToRegister=()=>{   
 navigation.navigate(Register)
 
   }
@@ -16,58 +56,30 @@ navigation.navigate(Register)
       <Text style={styles.title}>Login Page</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email/User Name"
+        placeholder="Email/User_Name"
+        onChangeText={(text)=> setEmail(text)}
       />
       
+      <View style={styles.passwordCon}> 
       <TextInput
-        style={styles.input}
+      style={styles.passwordInput}
+      onChangeText={(text)=> setPassword(text)}
         placeholder="Password"
-        secureTextEntry 
+        secureTextEntry={showPassword}  
       />
+
+      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" : 'black'} onPress={onEyePressed} />
+      </View>
       
-      <Button title="Signin " />
+      <Button title="Signin " onPress={userSigned}/>
       <TouchableOpacity>
       <Text style={{ marginTop:10}} onPress={goToRegister} > Don't have an aacount?</Text>
       </TouchableOpacity>
     
-
-
 
 </View>
 
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    padding: 10,
-    marginVertical: 10,
-    width: '80%',
-  },
-  gButton: {
-    margin:10,
-    height:40,
-    width:120,
-    alignItems:'center',
-    borderRadius:10,
-    borderWidth:1,
-    justifyContent:'center',
-    backgroundColor:'green',
-
-
-  },
-});
-export {Login};
+export{Login};
