@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { View, TextInput, StyleSheet, Button, Text , ActivityIndicator } from 'react-native';
+import { Image,View, TextInput, StyleSheet, Button, Text , ActivityIndicator } from 'react-native';
 import { Main } from '../main/main';
 import Spinner from "react-native-loading-spinner-overlay";
 import { auth } from "../../services/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
-
+import { Camera } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
 
 function Register({navigation}){
 
@@ -15,19 +15,24 @@ function Register({navigation}){
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState (true);
+
+
+
+const onEyePressed=()=>{
+
+  if(showPassword=== true)
+  {
+    setShowPassword(false)
+  }
+  else {
+    setShowPassword(true)
+  }
+}
+
 
   const onSubmitPress=()=>{
 
-    createUserWithEmailAndPassword (auth, email, password).then(response=>{
-      alert("All is Good")
-    })
-    .catch((error) =>{
-      alert(error.message);
-    });
-
-  }
-
-  const onSubmit = () => {
     if (firstName === "") {
       alert("please enter first name");
       return;
@@ -56,18 +61,30 @@ function Register({navigation}){
       alert("passwords dont match");
       return;
     }
+    createUserWithEmailAndPassword (auth, email, password).then(response=>{
+      alert("User registered successfully")
+    })
+    .catch((error) =>{
+      alert(error.message);
+    });
+    setLoading(true);
+    navigation.navigate(Main)
+    setLoading(false);
 
-    
-setLoading(true);
-navigation.navigate(Main)
-setLoading(false);
   }
 
   return (
     
     <View style={styles.container}>
-
+    
       <Text style={styles.title}>Registration Page</Text>
+      
+      <View>
+       <Image source={require('../../.././assets/icon.png')} 
+       style={{width:100, height:100, borderRadius:20, borderWidth:1, borderColor:'black'}}>
+       </Image>
+      </View>
+
       <TextInput
         onChangeText={setFirstName}
         style={styles.input}
@@ -83,26 +100,30 @@ setLoading(false);
         style={styles.input}
         placeholder="email"
       />
-       
+      <View style={styles.passwordCon}> 
       <TextInput
-      onChangeText={setPassword}
-        style={styles.input}
+      style={styles.passwordInput}
+      onChangeText={(text)=> setPassword(text)}
         placeholder="password"
-        secureTextEntry
-        
+        secureTextEntry={showPassword}  
       />
-      <TextInput
-      onChangeText={setConfirmPassword}
-        style={styles.input}
-        placeholder="confirmPassword"
-        secureTextEntry
-      
-      />
-      <Button title="Signup " onPress={onSubmitPress} />
 
-<View>
+      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" : 'black'} onPress={onEyePressed} />
+      </View>
+
+      <View style={styles.passwordCon}> 
+      <TextInput
+      style={styles.passwordInput}
+       onChangeText={(text)=> setConfirmPassword(text)}
+       placeholder="confirmPassword"
+       secureTextEntry={showPassword}
+      />
+
+      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" :'black'} onPress={onEyePressed} />
+      </View>
+      
+      <Button title="Signup " onPress={onSubmitPress} />
 <Spinner visible={loading} textContent={"Loading..."} />
-</View>
 
 </View>
 
@@ -113,7 +134,7 @@ setLoading(false);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -128,8 +149,23 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     marginVertical: 10,
-    width: '80%',
+    width: '85%',
   },
+  passwordCon:{
+    alignItems:'center',
+    flexDirection:'row',
+    borderRadius: 4,
+    borderWidth:1,    
+    borderColor: '#ccc',    
+    padding: 9,
+    marginVertical: 10,
+
+  },
+  passwordInput:{
+    width: '80%',
+
+  }
+
 });
 
 export {Register};
