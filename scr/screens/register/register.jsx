@@ -1,13 +1,22 @@
-import { useState } from "react";
-import { Image,View, TextInput, StyleSheet, Button, Text , ActivityIndicator } from 'react-native';
-import { Main } from '../main/main';
+import {
+  TouchableOpacity,
+  Image,
+  View,
+  TextInput,
+  Button,
+  Text,
+} from "react-native";
+import { Main } from "../main/main";
 import Spinner from "react-native-loading-spinner-overlay";
-import { auth } from "../../services/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { styles } from "./register_style";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { CustomCamera } from "../../components/customCamera";
+import { useState } from "react";
+import { auth } from "../../services/firebaseConfig";
 
-function Register({navigation}){
+function Register({ navigation }) {
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,40 +24,30 @@ function Register({navigation}){
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState (true);
+  const [showPassword, setShowPassword] = useState(true);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+ 
+  const onEyePressed = () => {
+    if (showPassword === true) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
+  };
 
-
-
-const onEyePressed=()=>{
-
-  if(showPassword=== true)
-  {
-    setShowPassword(false)
-  }
-  else {
-    setShowPassword(true)
-  }
-}
-
-
-  const onSubmitPress=()=>{
-
+  const onSubmitPress = () => {
     if (firstName === "") {
       alert("please enter first name");
       return;
     }
-
     if (lastName === "") {
       alert("please enter last name");
-
       return;
     }
-
     if (email === "") {
       alert("please enter email");
       return;
     }
-
     if (password === "") {
       alert("please enter password");
       return;
@@ -61,74 +60,104 @@ const onEyePressed=()=>{
       alert("passwords dont match");
       return;
     }
+  
+setLoading(true);
+  
     createUserWithEmailAndPassword (auth, email, password).then(response=>{
       alert("User registered successfully")
+      setLoading(false);
+
     })
     .catch((error) =>{
       alert(error.message);
+      setLoading(false);
+
     });
-    setLoading(true);
+    
     navigation.navigate(Main)
     setLoading(false);
 
-  }
-
+};
+    const onPickImagePress = () => {
+      // invert the state of camera opernet
+      setIsCameraOpen(true)
+    }
+  
   return (
-    
     <View style={styles.container}>
-    
       <Text style={styles.title}>Registration Page</Text>
-      
-      <View>
-       <Image source={require('../../.././assets/icon.png')} 
-       style={{width:100, height:100, borderRadius:50, borderWidth:1, borderColor:'orange'}}>
-       </Image>
+
+      <View><TouchableOpacity style={styles.pickImageCon}
+          onPress={onPickImagePress}
+        >
+        <Image
+          source={require("../../.././assets/icon.png")}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            borderWidth: 1,
+            borderColor: "orange",
+            alignSelf:'center'
+          }}
+        ></Image>
+        </TouchableOpacity>
       </View>
 
       <TextInput
         onChangeText={setFirstName}
         style={styles.input}
-        placeholder="firstName"
+        placeholder="FirstName"
       />
       <TextInput
-      onChangeText={setLastName}
+        onChangeText={setLastName}
         style={styles.input}
-        placeholder="lastName"
+        placeholder="LastName"
       />
       <TextInput
-      onChangeText={setEmail}
+        onChangeText={setEmail}
         style={styles.input}
-        placeholder="email"
+        placeholder="Email"
       />
-      <View style={styles.passwordCon}> 
-      <TextInput
-      style={styles.passwordInput}
-      onChangeText={(text)=> setPassword(text)}
-        placeholder="password"
-        secureTextEntry={showPassword}  
-      />
+      <View style={styles.passwordCon}>
+        <TextInput
+          style={styles.passwordInput}
+          onChangeText={(text) => setPassword(text)}
+          placeholder="Password"
+          secureTextEntry={showPassword}
+        />
 
-      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" : 'black'} onPress={onEyePressed} />
+        <Ionicons
+          name={showPassword ? "eye" : "eye-off"}
+          size={24}
+          color={showPassword ? "orange" : "black"}
+          onPress={onEyePressed}
+        />
       </View>
 
-      <View style={styles.passwordCon}> 
-      <TextInput
-      style={styles.passwordInput}
-       onChangeText={(text)=> setConfirmPassword(text)}
-       placeholder="confirmPassword"
-       secureTextEntry={showPassword}
-      />
+      <View style={styles.passwordCon}>
+        <TextInput
+          style={styles.passwordInput}
+          onChangeText={(text) => setConfirmPassword(text)}
+          placeholder="ConfirmPassword"
+          secureTextEntry={showPassword}
+        />
 
-      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" :'black'} onPress={onEyePressed} />
+        <Ionicons
+          name={showPassword ? "eye" : "eye-off"}
+          size={24}
+          color={showPassword ? "orange" : "black"}
+          onPress={onEyePressed}
+        />
       </View>
-      
+
       <Button title="Signup " onPress={onSubmitPress} />
-<Spinner visible={loading} textContent={"Loading..."} />
 
-</View>
+      <Spinner visible={loading} textContent={"Loading..."} />
 
-    );
+      {isCameraOpen === true && <CustomCamera />}
 
-};
-
-export {Register};
+    </View>
+  );
+}
+export { Register };

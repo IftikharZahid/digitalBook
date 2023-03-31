@@ -29,6 +29,19 @@ const styles = StyleSheet.create({
       marginVertical: 10,
   
     },
+    pickImageCon: {
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      alignSelf: 'center'
+    },
+    profieImage: {
+      width: 200,
+      height: 200,
+      borderRadius: 100
+  
+    },
+    
     passwordInput:{
       width: '80%',
   

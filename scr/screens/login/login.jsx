@@ -1,85 +1,93 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text , TouchableOpacity} from 'react-native';
-import { Register } from '../register/register';
-import{styles} from './login_styles'
-import { Ionicons } from '@expo/vector-icons';
+import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
+import { Register } from "../register/register";
+import { styles } from "./login_styles";
+import { Ionicons } from "@expo/vector-icons";
 import { Main } from "../main/main";
 
-function Login({navigation}){
+function Login({ navigation }) {
+  const [showPassword, setShowPassword] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [Alert, setAlert] = useState();
 
-const [showPassword, setShowPassword] = useState();
-const [password, setPassword] = useState ();
-const [email, setEmail] = useState ();
 
+  const onEyePressed = () => {
+    if (showPassword === true) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
 
-const userSigned =()=>{
+    if (Alert === true) {
+      setAlert(false);
+    } else {
+      setAlert(true);
+    }
 
-  if (email === "") {
-    alert("please enter Email/User Name");
-    return;
-  }
+  };
+  const userSigned = () => {
 
-  if (password === "") {
-    alert("please enter password");
+    if (email === "") {
+      alert("Enter Email/User Name.");
+      return;
+    }
+    if (password === "") {
+      alert("Enter Password");
+      return;
+    }
+   navigation.navigate(Main)
+  };
 
-    return;
-  }
-  if( email !== password )
-  {
-      navigation.navigate(Main)
-  }
-  else{
-      alert ('email and password should not be same')
-
-  }
-};
-
-const onEyePressed=()=>{
-
-  if(showPassword=== true)
-  {
-    setShowPassword(false)
-  }
-  else {
-    setShowPassword(true)
-  }
-}
-
-const goToRegister=()=>{   
-navigation.navigate(Register)
-
-  }
+  const goToRegister = () => {
+    navigation.navigate(Register);
+  };
 
   return (
-  
     <View style={styles.container}>
       <Text style={styles.title}>Login Page</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email/User_Name"
-        onChangeText={(text)=> setEmail(text)}
-      />
-      
-      <View style={styles.passwordCon}> 
-      <TextInput
-      style={styles.passwordInput}
-      onChangeText={(text)=> setPassword(text)}
-        placeholder="Password"
-        secureTextEntry={showPassword}  
+        placeholder="Email"
+        onChangeText={(text) => setEmail(text)}
       />
 
-      <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color={showPassword ? "orange" : 'black'} onPress={onEyePressed} />
+      <View style={styles.passwordCon}>
+        <TextInput
+          style={styles.passwordInput}
+          onChangeText={(text) => setPassword(text)}
+          placeholder="Password"
+          secureTextEntry={showPassword}
+        />
+
+        <Ionicons
+          name={showPassword ? "eye" : "eye-off"}
+          size={24}
+          color={showPassword ? "orange" : "black"}
+          onPress={onEyePressed}
+        />
       </View>
-      
-      <Button title="Signin " onPress={userSigned}/>
+
+      <Text
+        style={{
+          alignSelf: "flex-start",
+          marginLeft: 30,
+          marginBottom: 10,
+          color: "red",
+        }}
+     
+      >
+        {"⚠ Password is shown ⚠"}
+      </Text>
+
+      <Button title="Signin " onPress={userSigned} />
       <TouchableOpacity>
-      <Text style={{ marginTop:10}} onPress={goToRegister} > Don't have an aacount?</Text>
+        <Text style={{ marginTop: 10 }} onPress={goToRegister}>
+          {"Don't have an aacount?"}
+        </Text>
       </TouchableOpacity>
-    
-
-</View>
-
+    </View>
   );
-};
+}
 
-export{Login};
+export { Login };
