@@ -4,6 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from "axios";
 import { Map } from "../map/map";
 import { Settings } from "../settings/settings";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Login } from "../login/login";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Main({ navigation }) {
   const [users, setUsers] = useState();
@@ -36,7 +39,7 @@ function Main({ navigation }) {
       style={{
         padding: 10,
         margin: 10,
-        flexDirection: "row",
+        flexDirection: 'row',
       }}
     >
       <Image
@@ -59,6 +62,28 @@ function Main({ navigation }) {
     navigation.navigate(Map);
   };
 
+  async function removeUser() {
+    try {
+      await AsyncStorage.removeItem("isUserLoggedIn", "true");
+      console.log('User removed from storage');
+      navigation.navigate(Login);
+
+    } catch (error) {
+      console.log('Error removing user from storage', error);
+    }
+  };
+  
+    const Logout = async () => {
+      try {
+        await AsyncStorage.setItem("isUserLoggedIn", "false") ;
+        alert('User removed from storage');
+         navigation.navigate(Login);
+      
+      } catch (error) {
+        alert(error.message);
+      }
+    }; 
+
   return (
     <View style={{ justifyContent: "center", flex: 1, marginTop: 30 }}>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
@@ -75,7 +100,15 @@ function Main({ navigation }) {
         >
           <Ionicons name={"location"} size={35} color={"orange"} />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={Logout}
+          style={{ alignSelf: "flex-end", marginRight: 5 }}
+        >
+          <MaterialCommunityIcons name="logout" size={35} color="orange" />
+        </TouchableOpacity>
       </View>
+
+
       <FlatList data={users} renderItem={__renderItem} />
 
       {/* <Text>main</Text>

@@ -15,13 +15,12 @@ import {
   saveUserUid,
 } from "../../utils/help";
 
-
 function Login({ navigation }) {
   const [showPassword, setShowPassword] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
-
+  const [showText, setShowText] = useState();
 
   useEffect(() => {
     getIsUserLoggedIn().then((response) => {
@@ -38,10 +37,13 @@ function Login({ navigation }) {
       setShowPassword(true);
     }
 
+    if (showText === true) {
+      setShowText(false);
+    } else {
+      setShowText(true);
+    }
   };
-  
   const userSigned = () => {
-
     if (email === "") {
       alert("Enter Email/User Name.");
       return;
@@ -64,7 +66,8 @@ function Login({ navigation }) {
       .catch((error) => {
         alert(error.message);
         setLoading(false);
-      });  };
+      });
+  };
 
   const goToRegister = () => {
     navigation.navigate(Register);
@@ -102,9 +105,10 @@ function Login({ navigation }) {
           marginBottom: 10,
           color: "red",
         }}
-     
       >
-        {"⚠ Password is shown ⚠"}
+        {showPassword
+          ? "Password is Hidden 🔐"
+          : "Password is Shown 🔓"}
       </Text>
 
       <Button title="Signin " onPress={userSigned} />
