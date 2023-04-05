@@ -5,7 +5,6 @@ import axios from "axios";
 import { Map } from "../map/map";
 import { Settings } from "../settings/settings";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Login } from "../login/login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Main({ navigation }) {
@@ -55,29 +54,19 @@ function Main({ navigation }) {
   );
 
   const goToSettings = () => {
-    navigation.navigate(Settings);
+    navigation.navigate("Settings");
   };
 
   const goToMap = () => {
-    navigation.navigate(Map);
+    navigation.navigate("Map");
   };
 
-  async function removeUser() {
-    try {
-      await AsyncStorage.removeItem("isUserLoggedIn", "true");
-      console.log('User removed from storage');
-      navigation.navigate(Login);
-
-    } catch (error) {
-      console.log('Error removing user from storage', error);
-    }
-  };
   
     const Logout = async () => {
       try {
         await AsyncStorage.setItem("isUserLoggedIn", "false") ;
-        alert('User removed from storage');
-         navigation.navigate(Login);
+        alert('Sign out');
+         navigation.navigate("Login");
       
       } catch (error) {
         alert(error.message);
