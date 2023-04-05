@@ -5,7 +5,7 @@ import { Camera, CameraType } from "expo-camera";
 
 
 
-/// a full screen camera operna
+/// a full screen camera opener
 // takes picture and gives its parent screen the picture data
 // closes it self 
 

@@ -3,14 +3,33 @@ import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
 import { Register } from "../register/register";
 import { styles } from "./login_styles";
 import { Ionicons } from "@expo/vector-icons";
-import { Main } from "../main/main";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebaseConfig";
+import Spinner from "react-native-loading-spinner-overlay";
+import { useEffect } from "react";
+
+import {
+  getIsUserLoggedIn,
+  getUserUid,
+  saveIsUserLoggedIn,
+  saveUserUid,
+} from "../../utils/help";
+
 
 function Login({ navigation }) {
   const [showPassword, setShowPassword] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
-  const [Alert, setAlert] = useState();
+  const [loading, setLoading] = useState(false);
 
+
+  useEffect(() => {
+    getIsUserLoggedIn().then((response) => {
+      if (response === "true") {
+        navigation.replace("Main");
+      }
+    });
+  }, []);
 
   const onEyePressed = () => {
     if (showPassword === true) {
@@ -19,13 +38,8 @@ function Login({ navigation }) {
       setShowPassword(true);
     }
 
-    if (Alert === true) {
-      setAlert(false);
-    } else {
-      setAlert(true);
-    }
-
   };
+  
   const userSigned = () => {
 
     if (email === "") {
@@ -36,8 +50,21 @@ function Login({ navigation }) {
       alert("Enter Password");
       return;
     }
-   navigation.navigate(Main)
-  };
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        const user = response.user;
+        const uid = user.uid;
+        // save user session and user uid in local storage and move ahead
+        saveIsUserLoggedIn();
+        saveUserUid(uid);
+        setLoading(false);
+        navigation.replace("Main");
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoading(false);
+      });  };
 
   const goToRegister = () => {
     navigation.navigate(Register);
