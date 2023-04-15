@@ -1,8 +1,7 @@
 import { StyleSheet, View } from "react-native";
-
 import MapView from "react-native-maps";
-
 import React from "react";
+
 
 function Map({ navigation }) {
   return (

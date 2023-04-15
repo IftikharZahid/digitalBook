@@ -5,7 +5,7 @@ import { styles } from "./login_styles";
 import { Ionicons } from "@expo/vector-icons";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
-import Spinner from "react-native-loading-spinner-overlay";
+import Spinner from 'react-native-loading-spinner-overlay';
 import { useEffect } from "react";
 
 import {
@@ -62,6 +62,7 @@ function Login({ navigation }) {
         saveUserUid(uid);
         setLoading(false);
         navigation.replace("Main");
+        alert("Welcome");
       })
       .catch((error) => {
         alert(error.message);
@@ -70,7 +71,8 @@ function Login({ navigation }) {
   };
 
   const goToRegister = () => {
-    navigation.navigate(Register);
+    navigation.navigate("Register");
+  
   };
 
   return (

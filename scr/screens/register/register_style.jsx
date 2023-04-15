@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1.5,
+      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -30,21 +30,26 @@ const styles = StyleSheet.create({
   
     },
     pickImageCon: {
-      width: 200,
-      height: 200,
-      borderRadius: 100,
-      alignSelf: 'center'
+      width: 100,
+      height: 100,
+      borderRadius: 10,
+      alignSelf: 'center',
     },
-    profieImage: {
+    profileImage: {
       width: 200,
       height: 200,
       borderRadius: 100
   
     },
-    
-    passwordInput:{
-      width: '80%',
+
+Button:{
+marginTop:10
+
+}
+    ,
   
+    passwordInput:{
+      width: '78%',
     }
   
   });

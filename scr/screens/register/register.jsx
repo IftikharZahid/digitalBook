@@ -95,7 +95,7 @@ setLoading(true);
           style={{
             width: 100,
             height: 100,
-            borderRadius: 50,
+            borderRadius: 30,
             borderWidth: 1,
             borderColor: "orange",
             alignSelf:'center'
@@ -151,7 +151,7 @@ setLoading(true);
         />
       </View>
 
-      <Button title="Signup " onPress={onSubmitPress} />
+      <Button title="Signup now " onPress={onSubmitPress} />
 
       <Spinner visible={loading} textContent={"Loading..."} />
 

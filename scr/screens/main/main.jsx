@@ -2,8 +2,6 @@ import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from "axios";
-import { Map } from "../map/map";
-import { Settings } from "../settings/settings";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -58,7 +56,7 @@ function Main({ navigation }) {
   };
 
   const goToMap = () => {
-    navigation.navigate("Map");
+    navigation.navigate ("Map");
   };
 
   
