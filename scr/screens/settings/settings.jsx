@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "../../services/firebaseConfig";
+import { CustomCamera } from "../../components/customCamera";
 
 import { Styles } from "./settings_styles";
 import { Button } from "../../components/button";

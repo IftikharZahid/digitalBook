@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      borderRadius:10,
+      padding:20,
     },
     title: {
       fontSize: 20,
@@ -13,20 +15,24 @@ const styles = StyleSheet.create({
     },
     input: {
       borderWidth: 1,
-      borderColor: '#ccc',
+      borderColor: 'purple',
       borderRadius: 4,
       padding: 10,
       marginVertical: 10,
       width: '85%',
+      backgroundColor:'white',
+      opacity:0.8
     },
     passwordCon:{
       alignItems:'center',
       flexDirection:'row',
       borderRadius: 4,
       borderWidth:1,    
-      borderColor: '#ccc',    
+      borderColor: 'purple',    
       padding: 9,
       marginVertical: 10,
+      backgroundColor:'white',
+      opacity:0.8
   
     },
     pickImageCon: {
@@ -47,10 +53,20 @@ marginTop:10
 
 }
     ,
-  
+    background: {
+      flex: 1,
+      resizeMode: 'center', // or 'stretch'
+    },
     passwordInput:{
       width: '78%',
-    }
+    },
+    paddings:{
+      backgroundColor:'purple',
+      borderRadius:10,
+      padding:15,
+      
+    
+      },
   
   });
 export {styles};

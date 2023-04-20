@@ -1,7 +1,7 @@
 import {
   TouchableOpacity,
   Image,
-  View,
+  View,ImageBackground,
   TextInput,
   Button,
   Text,
@@ -16,7 +16,6 @@ import { useState } from "react";
 import { auth } from "../../services/firebaseConfig";
 
 function Register({ navigation }) {
-
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -84,6 +83,13 @@ setLoading(true);
     }
   
   return (
+
+    <ImageBackground
+      source={require("../../../assets/01.jpg")}
+      style={styles.background} 
+      imageStyle={{ opacity: 0.5 }}
+      > 
+
     <View style={styles.container}>
       <Text style={styles.title}>Registration Page</Text>
 
@@ -158,6 +164,8 @@ setLoading(true);
       {isCameraOpen === true && <CustomCamera />}
 
     </View>
+    </ImageBackground>
+
   );
 }
 export { Register };

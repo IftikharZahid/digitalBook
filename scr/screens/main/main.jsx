@@ -41,12 +41,12 @@ function Main({ navigation }) {
     >
       <Image
         style={{ width: 100, height: 100, borderRadius: 50, marginRight: 5 }}
-        src={item.avatar_url}
+        source={{ uri: item.avatar_url }}
       />
       <View>
         <Text style={{ fontSize: 20 }}>{item.id}</Text>
         <Text style={{ fontSize: 20 }}>{item.login}</Text>
-        <Text style={{ fontSize: 20 }}>{item.followers_url}</Text>
+        <Text style={{ fontSize: 20 }}>{item.type}</Text>
       </View>
     </View>
   );
@@ -63,7 +63,7 @@ function Main({ navigation }) {
     const Logout = async () => {
       try {
         await AsyncStorage.setItem("isUserLoggedIn", "false") ;
-        alert('Sign out');
+        alert('Signout');
          navigation.navigate("Login");
       
       } catch (error) {
@@ -97,6 +97,10 @@ function Main({ navigation }) {
 
 
       <FlatList data={users} renderItem={__renderItem} />
+
+      {/* <Text>main</Text>
+      <
+latList data={users} renderItem={__renderItem} />
 
       {/* <Text>main</Text>
       <View style={{ flexDirection: "row" }}>
