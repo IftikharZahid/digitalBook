@@ -30,16 +30,12 @@ function CustomCamera({ }) {
         // check if the path of picture exists then take it to the state
         if (response.uri !== undefined) {
           // setProfilePicUri(response.uri);
-
-          
         }
       })
       .catch((error) => {
         alert(error.message);
       });
   };
-
-
 
   return (
     <View style={styles.con}>
@@ -58,8 +54,8 @@ function CustomCamera({ }) {
 const styles = StyleSheet.create({
   con: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: '113%',
+    height: '107%',
   },
   camera: {
     flex: 1,
