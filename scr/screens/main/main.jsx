@@ -36,7 +36,7 @@ function Main({ navigation }) {
       style={{
         padding: 10,
         margin: 10,
-        flexDirection: 'row',
+        flexDirection: "row",
       }}
     >
       <Image
@@ -56,20 +56,18 @@ function Main({ navigation }) {
   };
 
   const goToMap = () => {
-    navigation.navigate ("Map");
+    navigation.navigate("Map");
   };
 
-  
-    const Logout = async () => {
-      try {
-        await AsyncStorage.setItem("isUserLoggedIn", "false") ;
-        alert('Signout');
-         navigation.navigate("Login");
-      
-      } catch (error) {
-        alert(error.message);
-      }
-    }; 
+  const Logout = async () => {
+    try {
+      await AsyncStorage.setItem("isUserLoggedIn", "false");
+      alert("Signout");
+      navigation.navigate("Login");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <View style={{ justifyContent: "center", flex: 1, marginTop: 30 }}>
@@ -94,7 +92,6 @@ function Main({ navigation }) {
           <MaterialCommunityIcons name="logout" size={35} color="orange" />
         </TouchableOpacity>
       </View>
-
 
       <FlatList data={users} renderItem={__renderItem} />
 
